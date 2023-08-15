@@ -1,4 +1,4 @@
-name: build sing-box with proxy providers
+name: build sing-box
 
 on:
   workflow_dispatch:
@@ -16,10 +16,6 @@ jobs:
     name: Debug build
     runs-on: ubuntu-latest
     steps:
-      - name: Cancel previous
-        uses: styfle/cancel-workflow-action@0.7.0
-        with:
-          access_token: ${{ github.token }}
       - name: Set variables
         run: |
           echo "RELEASE_NAME=Released on $(date +%Y%m%d%H%M)" >> $GITHUB_ENV
