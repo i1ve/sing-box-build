@@ -1,4 +1,4 @@
-name: build sing-box
+name: build sing-box-yaott
 
 on:
   workflow_dispatch:
@@ -6,10 +6,10 @@ on:
     - cron: "0 0 */3 * *"
   push:
     branches:
-      - master
+      - yaott
   pull_request:
     branches:
-      - master
+      - yaott
 
 jobs:
   build:
