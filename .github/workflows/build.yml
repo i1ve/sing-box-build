@@ -4,6 +4,12 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "0 0 */3 * *"
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   build:
@@ -18,8 +24,8 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          repository: yaotthaha/sing-box-pub
-          ref: dev-next-yaott
+          repository: SagerNet/sing-box
+          ref: dev-next
       - name: Get latest go version
         id: version
         run: |
@@ -125,15 +131,10 @@ jobs:
       - name: Rename
         if: ${{ contains(matrix.name, 'linux') || contains(matrix.name, 'bsd') || contains(matrix.name, 'darwin') || contains(matrix.name, 'android') }}
         run: mv sing-box* sing-box-${{ matrix.name }}
-      - name: Upload artifact
-       uses: actions/upload-artifact@v2
-       with:
-         name: sing-box-${{ matrix.name }}
-         path: sing-box*
-      # - name: Release
-      #   uses: softprops/action-gh-release@v1
-      #   with:
-      #     tag_name: ${{ env.TAG_NAME }}
-      #     name: ${{ env.RELEASE_NAME }}
-      #     files: |
-      #       sing-box*
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ env.TAG_NAME }}
+          name: ${{ env.RELEASE_NAME }}
+          files: |
+            sing-box*
