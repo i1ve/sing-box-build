@@ -24,8 +24,8 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          repository: SagerNet/sing-box
-          ref: dev-next
+          repository: yaotthaha/sing-box-pub
+          ref: dev-next-yaott
       - name: Get latest go version
         id: version
         run: |
@@ -131,11 +131,11 @@ jobs:
       - name: Rename
         if: ${{ contains(matrix.name, 'linux') || contains(matrix.name, 'bsd') || contains(matrix.name, 'darwin') || contains(matrix.name, 'android') }}
         run: mv sing-box* sing-box-${{ matrix.name }}
-      - name: Upload artifact
-       uses: actions/upload-artifact@v2
-       with:
-         name: sing-box-${{ matrix.name }}
-         path: sing-box*
+      # - name: Upload artifact
+      #  uses: actions/upload-artifact@v2
+      #  with:
+      #    name: sing-box-${{ matrix.name }}
+      #    path: sing-box*
       # - name: Release
       #   uses: softprops/action-gh-release@v1
       #   with:
